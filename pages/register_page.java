@@ -32,7 +32,7 @@ public class register_page extends JFrame {
 		content.add(title, gbc);
 
 		// Email label
-		JLabel userLabel = new JLabel("Email");
+		JLabel userLabel = new JLabel("Email/Username");
 		userLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
@@ -121,13 +121,17 @@ public class register_page extends JFrame {
 					if (parts.length >= 1) {
 						String existing = parts[0].trim();
 						if (existing.equalsIgnoreCase(email)) {
-							JOptionPane.showMessageDialog(this, "This email is already registered.", "Duplicate", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(
+								this, "This email is already registered.", 
+								"Duplicate", 
+								JOptionPane.WARNING_MESSAGE
+							);
 							return;
 						}
 					}
 				}
 			} catch (IOException ex) {
-				// Show a user-friendly error and log to stderr
+				// Show an error message
 				JOptionPane.showMessageDialog(this, "Error reading users file.", "I/O Error", JOptionPane.ERROR_MESSAGE);
 				System.err.println("Error reading users.txt: " + ex.getMessage());
 			}

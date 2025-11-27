@@ -11,7 +11,7 @@ public class login_page extends JFrame {
     private JButton loginButton;
 
     public login_page() {
-        setTitle("Burger Shop!");
+        setTitle("Burger Shop");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(620, 340);
         setLocationRelativeTo(null);

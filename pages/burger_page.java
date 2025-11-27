@@ -26,17 +26,17 @@ public class burger_page {
 
         // Burger products with prices
         String[] burgerNames = {
-            "Grand Angus", "Bacon Burger", "BBQ Veggie", "Grilled Chicken Rs.500",
-            "Chicken Veggie", "Big Mac", "Big Fish", "Double Stack",
-            "Hawaiian", "Double BBQ", "Hash & Cheese", "Grilled Chicken Rs.500"
+            "Triple Patty w/ Cheese", "Regular Chicken Burger", "Large Regular Chicken Burger", "Pattyeg Burger",
+            "Triple Bun Burger", "Onion Mania Burger", "Cheesy Burst Burger", "Crunch Stack",
+            "Nugget Crunch", "Ultimate Cheese Melt", "Regular Patty", "Ultimate Veggie Burst"
         };
 
-        double[] burgerPrices = { 49,49,49,49,49,49,49,49,49,49,49,49 };
+        double[] burgerPrices = { 159,69,99,59,129,99,109,89,79,159,49,109 };
 
         String[] burgerImages = {
-            "burger1.png", "burger2.png", "burger3.png", "burger4.png",
-            "burger5.png", "burger6.png", "burger7.png", "burger8.png",
-            "burger9.png", "burger10.png", "burger1.png", "burger2.png"
+            "borgir1.png", "borgir2.png", "borgir13.png", "borgir4.png",
+            "borgir5.png", "borgir6.png", "borgir7.png", "borgir8.png",
+            "borgir9.png", "borgir10.png", "borgir11.png", "borgir12.png"
         };
 
         for (int i = 0; i < burgerNames.length; i++) {

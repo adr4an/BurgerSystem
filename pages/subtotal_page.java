@@ -11,6 +11,7 @@ public class subtotal_page {
 	private JLabel subtotalLabel;
 	private JLabel taxLabel;
 	private JLabel deliveryLabel;
+	private JLabel estimatedTimeLabel;
 	private JLabel totalLabel;
 
 	private static final double DELIVERY_FEE = 40.0;
@@ -40,7 +41,12 @@ public class subtotal_page {
 
 		inner.add(Box.createVerticalStrut(8));
 
-		inner.add(createRow("Estimated Delivery & Handling:", String.format("₱%.2f", DELIVERY_FEE)));
+		// Estimated delivery time (default)
+		inner.add(createRow("Estimated Delivery Time", "30-45 mins"));
+
+		inner.add(Box.createVerticalStrut(8));
+
+		inner.add(createRow("Shipping Fee:", String.format("₱%.2f", DELIVERY_FEE)));
 
 		inner.add(Box.createVerticalStrut(12));
 		inner.add(new JSeparator(SwingConstants.HORIZONTAL));
@@ -57,7 +63,7 @@ public class subtotal_page {
 		checkout.setPreferredSize(new Dimension(200, 40));
 		checkout.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 		checkout.setAlignmentX(Component.CENTER_ALIGNMENT);
-		checkout.addActionListener(e -> JOptionPane.showMessageDialog(panel, "Checkout not implemented"));
+		checkout.addActionListener(e -> JOptionPane.showMessageDialog(panel, "Successfully checked out! Thank you for the Order:)", "Checkout", JOptionPane.INFORMATION_MESSAGE));
 		inner.add(checkout);
 
 		panel.add(inner, BorderLayout.NORTH);
@@ -84,11 +90,13 @@ public class subtotal_page {
 		row.add(left, BorderLayout.WEST);
 		row.add(right, BorderLayout.EAST);
 
-		// save references for later updates
-		if (label.toLowerCase().contains("subtotal")) subtotalLabel = right;
-		if (label.toLowerCase().contains("tax")) taxLabel = right;
-		if (label.toLowerCase().contains("delivery")) deliveryLabel = right;
-		if (label.toLowerCase().contains("total")) totalLabel = right;
+		// save references for later updates (match specific labels to avoid collisions)
+		String lower = label.toLowerCase();
+		if (lower.contains("subtotal")) subtotalLabel = right;
+		else if (lower.contains("tax")) taxLabel = right;
+		else if (lower.contains("delivery time") || lower.contains("estimated delivery time") || lower.contains("time")) estimatedTimeLabel = right;
+		else if (lower.contains("shipping") || lower.contains("delivery & handling") || lower.contains("shipping fee")) deliveryLabel = right;
+		else if (lower.contains("total")) totalLabel = right;
 
 		return row;
 	}
@@ -102,6 +110,7 @@ public class subtotal_page {
 
 		if (subtotalLabel != null) subtotalLabel.setText(String.format("₱%.2f", subtotal));
 		if (taxLabel != null) taxLabel.setText("Free");
+		if (estimatedTimeLabel != null) estimatedTimeLabel.setText("30-45 mins");
 		if (deliveryLabel != null) deliveryLabel.setText(String.format("₱%.2f", DELIVERY_FEE));
 		if (totalLabel != null) totalLabel.setText(String.format("₱%.2f", subtotal + DELIVERY_FEE));
 	}

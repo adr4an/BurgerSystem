@@ -45,7 +45,7 @@ public class ProductCard {
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         try {
             ImageIcon icon = new ImageIcon(imagePath2 + imagePath);
-            Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            Image img = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(img));
         } catch (Exception e) {
             imageLabel.setText("No Image");
@@ -82,7 +82,7 @@ public class ProductCard {
         actionRow.setBackground(Color.WHITE);
         actionRow.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JButton buyNow = new JButton("Buy Now");
+        JButton buyNow = new JButton("Add to cart");
         buyNow.setBackground(new Color(255, 140, 0));
         buyNow.setForeground(Color.WHITE);
         buyNow.setFocusPainted(false);
