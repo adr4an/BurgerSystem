@@ -1,8 +1,12 @@
-package pages;
+package components;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 // Simple subtotal summary panel: Subtotal, Tax (Free), Delivery (₱40.00), Total, Checkout
 public class subtotal_page {
@@ -56,6 +60,11 @@ public class subtotal_page {
 
 		inner.add(Box.createVerticalStrut(18));
 
+		// Payment method (icons + label)
+		inner.add(Box.createVerticalStrut(8));
+		inner.add(createPaymentRow());
+		inner.add(Box.createVerticalStrut(12));
+
 		JButton checkout = new JButton("Checkout");
 		checkout.setBackground(Color.BLACK);
 		checkout.setForeground(Color.WHITE);
@@ -63,7 +72,7 @@ public class subtotal_page {
 		checkout.setPreferredSize(new Dimension(200, 40));
 		checkout.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 		checkout.setAlignmentX(Component.CENTER_ALIGNMENT);
-		checkout.addActionListener(e -> JOptionPane.showMessageDialog(panel, "Successfully checked out! Thank you for the Order:)", "Checkout", JOptionPane.INFORMATION_MESSAGE));
+		checkout.addActionListener(e -> JOptionPane.showMessageDialog(panel, "Successfully checked out!", "Checkout", JOptionPane.INFORMATION_MESSAGE));
 		inner.add(checkout);
 
 		panel.add(inner, BorderLayout.NORTH);
@@ -98,6 +107,40 @@ public class subtotal_page {
 		else if (lower.contains("shipping") || lower.contains("delivery & handling") || lower.contains("shipping fee")) deliveryLabel = right;
 		else if (lower.contains("total")) totalLabel = right;
 
+		return row;
+	}
+
+	// Custom row showing payment method icon + label
+	private JPanel createPaymentRow() {
+		JPanel row = new JPanel(new BorderLayout());
+		row.setBackground(Color.WHITE);
+		row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+
+		JLabel left = new JLabel("Mode of Payment");
+		left.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		left.setBorder(new EmptyBorder(4, 4, 4, 4));
+
+		// Right: icon + label (we only accept cash)
+		JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 6));
+		right.setBackground(Color.WHITE);
+		JLabel iconLabel = new JLabel();
+		try {
+			BufferedImage img = ImageIO.read(new File("assets/images/payment/cash.png"));
+			if (img != null) {
+				Image scaled = img.getScaledInstance(28, 28, Image.SCALE_SMOOTH);
+				iconLabel.setIcon(new ImageIcon(scaled));
+			}
+		} catch (Exception ex) {
+			iconLabel.setText("");
+		}
+
+		JLabel name = new JLabel("Cash");
+		name.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		right.add(iconLabel);
+		right.add(name);
+
+		row.add(left, BorderLayout.WEST);
+		row.add(right, BorderLayout.EAST);
 		return row;
 	}
 

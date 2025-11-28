@@ -7,6 +7,7 @@ import java.io.*;
 public class register_page extends JFrame {
 	private JTextField emailField;
 	private JPasswordField passwordField;
+	private JTextField locationField;
 
 	public register_page() {
 		setTitle("Burger Shop");
@@ -66,13 +67,30 @@ public class register_page extends JFrame {
 		gbc.insets = new Insets(8, 10, 8, 40);
 		content.add(passwordField, gbc);
 
+		// Location label
+		JLabel locLabel = new JLabel("Location");
+		locLabel.setFont(new Font("Arial", Font.BOLD, 16));
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(8, 40, 8, 10);
+		content.add(locLabel, gbc);
+
+		locationField = new JTextField(20);
+		locationField.setFont(new Font("Arial", Font.PLAIN, 14));
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(8, 10, 8, 40);
+		content.add(locationField, gbc);
+
 		// Register button
 		JButton registerButton = new JButton("Register");
 		registerButton.setFont(new Font("Poppins", Font.PLAIN, 14));
 		registerButton.setBackground(new Color(220, 230, 240));
 		registerButton.setFocusPainted(false);
 		gbc.gridx = 1;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.insets = new Insets(20, 10, 20, 40);
 		content.add(registerButton, gbc);
@@ -83,7 +101,7 @@ public class register_page extends JFrame {
 		loginLink.setForeground(new Color(0, 102, 204));
 		loginLink.setFont(new Font("Arial", Font.PLAIN, 13));
 		gbc.gridx = 1;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.insets = new Insets(0, 10, 20, 40);
 		content.add(loginLink, gbc);
@@ -105,6 +123,7 @@ public class register_page extends JFrame {
 	private void registerUser() {
 		String email = emailField.getText().trim();
 		String password = new String(passwordField.getPassword()).trim();
+		String location = locationField.getText().trim();
 
 		if (email.isEmpty() || password.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Please enter both email and password", "Input Error", JOptionPane.WARNING_MESSAGE);
@@ -137,10 +156,10 @@ public class register_page extends JFrame {
 			}
 		}
 
-		try (FileWriter fw = new FileWriter("users.txt", true);
-			 BufferedWriter bw = new BufferedWriter(fw);
-			 PrintWriter out = new PrintWriter(bw)) {
-			out.println(email + "," + password);
+		  try (FileWriter fw = new FileWriter("users.txt", true);
+			  BufferedWriter bw = new BufferedWriter(fw);
+			  PrintWriter out = new PrintWriter(bw)) {
+		  out.println(email + "," + password + "," + location);
 			JOptionPane.showMessageDialog(this, "Registration successful", "Success", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 			SwingUtilities.invokeLater(login_page::new);

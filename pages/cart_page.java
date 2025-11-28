@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import components.cart_item;
+import components.subtotal_page;
 
 public class cart_page {
 
